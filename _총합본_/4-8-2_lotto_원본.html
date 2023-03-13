@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="utf-8">
+  <title>로또추첨기</title>
+  <style>
+    
+      .ball {
+      display: inline-block;
+      border: 1px solid black;
+      border-radius: 20px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      font-size: 20px;
+      text-align: center;
+      margin-right: 20px;
+    }
+  </style>
+</head>
+
+<body>
+<div id="result">추첨 결과는? </div>
+<div id="bonus">보너스: </div>
+<br><br><br>
+
+  <div id="box">
+    <h2>개발 목표: HTML과 CSS, Javascript를 활용한 디자인 및 기능 추가. </h2>
+    <p>1. 로또 페이지 입장 전에 성인인증 경고창을 출력하고 이를 javascript alert창과 modal-window를 활용해 부각시킨다 - 이수현</p>
+    <p>2. 로또 번호에 시각적 효과를 추가 - 박성우</p>
+    <p>3. 일정 초기화 횟수(10) 조건을 만족시, 사용자 대상의 radio 도박 중독 정도를 input type=radio를 통한 객관식 문항 제시 및 결과를 수치로 환산한 자바스크립트 - 백수정</p>
+    <p>4. Chart.js를 활용한 동적 자료 구조를 시각적으로 표기 - 황동석</p>
+    <p>5. 전반적인 html, CSS layout 제작과 여러 컨텐츠의 통합, input 창과 랜덤 로또 번호 생성기 간 연결 등을 조치했습니다. - 김경민 </p>
+  </div>
+  
+
+
+<script>
+  const candidate = Array(45).fill().map((v, i) => i + 1);
+  const shuffle = [];
+  while (candidate.length > 0) {
+    const random = Math.floor(Math.random() * candidate.length); // 무작위 인덱스 뽑기
+    const spliceArray = candidate.splice(random, 1); // 뽑은 값은 배열에 들어 있음
+    const value = spliceArray[0]; // 배열에 들어 있는 값을 꺼내어
+    shuffle.push(value); // shuffle 배열에 넣기
+  }
+  console.log(shuffle);
+  const winBalls = shuffle.slice(0, 6).sort((a, b) => a - b);
+  const bonus = shuffle[6];
+  console.log(winBalls, bonus);
+
+  const $result = document.querySelector('#result');
+  const drawBall = (number, $parent) => {
+    const $ball = document.createElement('div');
+    $ball.className = 'ball';
+    $ball.textContent = number;
+    $parent.appendChild($ball);
+  };
+
+  for (let i = 0; i < winBalls.length; i++) {
+    setTimeout(() => {
+      drawBall(winBalls[i], $result);
+    }, (i + 1) * 1000);
+  }
+
+  const $bonus = document.querySelector('#bonus');
+  setTimeout(() => {
+    drawBall(bonus, $bonus);
+  }, 7000);
+
+
+  
+
+</script>
+</body>

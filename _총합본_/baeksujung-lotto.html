@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<style>
+  li > label > input[type=checkbox] {width: 20px; height: 20px; vertical-align: middle; margin: 0 5px 0 0;}
+  li > label > input[type=radio] {width: 20px; height: 20px; vertical-align: middle; margin: 0 5px 0 0; vertical-align: top;}
+  .top {font-size: 20px; text-align: center; font-weight: bolder; margin-bottom: 10px;}
+  .backstyle {background-color: #F16767; width: 350px; padding: 7px 12px 7px 12px}
+  .innerstyle {background-color: #F5EAEA; padding: 12px 12px 12px 12px; margin-top: 5px;}
+  .lists {list-style: none; margin-top: 7px;}
+  .boldfont {font-weight: bolder;}
+  .footer {text-align: center; margin-top: 15px;}
+  .buttonstyle {font-size: 20px; padding: 7px; width: 30%;}
+</style>
+
+
+<body>
+  <div class="backstyle">
+    <div class="top"> * 설문조사 * </div>
+    <div class="innerstyle">
+      <div class="boldfont">01. 귀하는 도박에서 잃어도 상관없는 금액 이상으로 도박을 한적이 있습니까?</div>
+      <div class="lists">
+      <li><label for="Q1_1"><input type="radio" name="Q1" id="Q1_1" value="5"> 매우 그렇다.</label></li>
+      <li><label for="Q1_2"><input type="radio" name="Q1" id="Q1_2" value="4"> 그렇다.</label></li>
+      <li><label for="Q1_3"><input type="radio" name="Q1" id="Q1_3" value="3"> 보통이다.</label></li>
+      </div>
+    </div>
+    <div class="innerstyle">
+      <div class="boldfont">02. 귀하는 도박에서 이전과 같은 흥분을 느끼기 위해 더 많은 돈을 걸어야 했던 적이 있습니까?</div>
+      <div class="lists">
+      <li><label for="Q2_1"><input type="radio" name="Q2" id="Q2_1" value="5"> 매우 그렇다.</label></li>
+      <li><label for="Q2_2"><input type="radio" name="Q2" id="Q2_2" value="4"> 그렇다.</label></li>
+      <li><label for="Q2_3"><input type="radio" name="Q2" id="Q2_3" value="3"> 보통이다.</label></li>
+      </div>
+    </div>
+    <div class="innerstyle">
+      <div class="boldfont">03. 귀하는 도박으로 잃은 돈을 만회하기 위해 다른날 다시 도박을 한 적이 있습니까?</div>
+      <div class="lists">
+      <li><label for="Q3_1"><input type="radio" name="Q3" id="Q3_1" value="5"> 매우 그렇다.</label></li>
+      <li><label for="Q3_2"><input type="radio" name="Q3" id="Q3_2" value="4"> 그렇다.</label></li>
+      <li><label for="Q3_3"><input type="radio" name="Q3" id="Q3_3" value="3"> 보통이다.</label></li>
+      </div>
+    </div>
+    <div class="innerstyle">
+      <div class="boldfont">04. 귀하는 도박 자금을 마련하기 위해 돈을 빌리거나 무엇인가를 판 적이 있습니까?</div>
+      <div class="lists">
+      <li><label for="Q4_1"><input type="radio" name="Q4" id="Q4_1" value="5"> 매우 그렇다.</label></li>
+      <li><label for="Q4_2"><input type="radio" name="Q4" id="Q4_2" value="4"> 그렇다.</label></li>
+      <li><label for="Q4_3"><input type="radio" name="Q4" id="Q4_3" value="3"> 보통이다.</label></li>
+      </div>
+    </div>
+    <div class="innerstyle">
+      <div class="boldfont">05. 귀하는 자신의 도박행위가 문제가 될 수준이라고 느낀적이 있습니까?</div>
+      <div class="lists">
+      <li><label for="Q5_1"><input type="radio" name="Q5" id="Q5_1" value="5"> 매우 그렇다.</label></li>
+      <li><label for="Q5_2"><input type="radio" name="Q5" id="Q5_2" value="4"> 그렇다.</label></li>
+      <li><label for="Q5_3"><input type="radio" name="Q5" id="Q5_3" value="3"> 보통이다.</label></li>
+      </div>
+    </div>
+
+    <div class="footer">
+      <button id="resume" class="buttonstyle"> 제 출 </button>
+      <h2 id="total">총점: </h2>
+      <h5 id="message"></h5>
+      <h5>총점 16점이하: 적정 /20점이하: 위험 /25점이상: 매우위험</h5>
+      <!-- <input type="text" name="total" id="total"> :점 -->
+    </div>
+  </div>
+</body>
+</html>
+
+
+<script>
+  //변수선언
+  let total = document.querySelector('#total');  
+  let total_Q1 = 0;
+  let total_Q2 = 0;
+  let total_Q3 = 0;
+  let total_Q4 = 0;
+  let total_Q5 = 0;
+  let sum = 0;
+  let resume = document.querySelector('#resume')
+  let message = document.querySelector('#message')
+  
+  //radio buttons 개별 value값 가져오기
+  let questions1 = document.querySelectorAll('input[name=Q1]');
+  questions1.forEach(function (quest1) {
+    quest1.addEventListener('change', function (event) {
+      total_Q1 = Number(this.value);                      
+      displaytotal();
+    })
+  })
+  let questions2 = document.querySelectorAll('input[name=Q2]');
+  questions2.forEach(function (quest2) {
+    quest2.addEventListener('change', function (event) {
+      total_Q2 = Number(this.value);                      
+      displaytotal();
+    })
+  })
+  let questions3 = document.querySelectorAll('input[name=Q3]');
+  questions3.forEach(function (quest3) {
+    quest3.addEventListener('change', function (event) {
+      total_Q3 = Number(this.value);                      
+      displaytotal();
+    })
+  })
+  let questions4 = document.querySelectorAll('input[name=Q4]');
+  questions4.forEach(function (quest4) {
+    quest4.addEventListener('change', function (event) {
+      total_Q4 = Number(this.value);                      
+      displaytotal();
+    })
+  })
+  let questions5 = document.querySelectorAll('input[name=Q5]');
+  questions5.forEach(function (quest5) {
+    quest5.addEventListener('change', function (event) {
+      total_Q5 = Number(this.value);                      
+      displaytotal();
+    })
+  })
+  
+
+  // 총점 계산하기
+  function displaytotal() {
+    total.textContent =`총점: ${total_Q1 + total_Q2 + total_Q3 + total_Q4 + total_Q5}`;        
+  }
+  
+  // 버튼 클릭시 메세지띄우기
+  resume.addEventListener('click', ()=> {
+    message.textContent = '수고하셨습니다:)'
+  })
+
+</script>

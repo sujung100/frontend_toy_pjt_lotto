@@ -1,0 +1,89 @@
+ /* Kkm(김경민) - 추가한 사항: 
+  1. 볼의 색깔 기입.
+  2. 사용자가 input 창에 6자리 숫자를 기입하면, 일치 결과에 따라 1,2,3,4등 및 꽝을 input창 아래 결과란 div #WinorNot에 표시한다. */
+
+
+ /* 위치를 window창 가운데로 바꿔봤습니다. 수정이 더 필요할 것입니다. */
+
+ *{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+ }
+ section {
+   position: absolute;
+   width: 80%;
+   height: 180%;
+   text-align: center;
+   margin: 0 10%;
+   background-color: antiquewhite;
+
+ }
+
+ section #wrap {
+  width: 100%;
+  margin: 0 auto;
+  margin-top: 150px;
+
+ }
+
+ section #lotteryMachImg {
+  position: relative;
+  display: block;
+  width: 55vw;
+  height: 80vh;
+  margin: 0 auto;
+  background-image: url(../imgs/[꾸미기]pngtree-golden-coin-yellow-gold-coin-round-lottery-machine-cartoon-illustration-png-image_3877822.jpg);
+  background-size: cover;
+}
+
+section #lotteryMachImg #inputBox {
+  padding-top: 20vh;
+  text-align: center;
+}
+
+section #lotteryMachImg #inputBox label {
+  font-size: 30px;
+}
+
+section #lotteryMachImg #inputBox .inputCell {
+  text-align: center;
+  padding-top: 30vh;
+}
+
+.coin {
+  display:inline-flex;
+  width:50px;
+  height:50px;
+  background:url("../imgs/1.gif");
+  background-size:cover;
+}
+
+ .ball {
+   display: inline-block;
+   border: 1px solid black;
+   border-radius: 20px;
+   width: 40px;
+   height: 40px;
+   line-height: 40px;
+   font-size: 20px;
+   text-align: center;
+   margin-right: 20px;
+   /* background-color: aqua; */
+ }
+
+.chartBox {
+  background: white; 
+  width: 50%;
+  margin: 0 auto;
+}
+
+#reData {
+  width: 100px;
+  height: 30px;
+  
+}
+
+
+
+
+
+ 
